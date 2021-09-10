@@ -1,20 +1,20 @@
 import Card from "./component/Card"
 import { useState,useEffect } from "react";
 // import data from "./data.json"
+import axios from "axios";
 
 function App(){
 
   const [itemList, SetItemList] = useState([]);
 
   useEffect(() => {
-    fetch("https://breakingbadapi.com/api/characters")
-    .then(response => response.json())
-    .then(data => {SetItemList(data); console.log(data)})
-    .catch(error => console.log(error)
-      )
+    // fetch("https://breakingbadapi.com/api/characters")
+    // .then(response => response.json())
+    // .then(data => {SetItemList(data); console.log(data)})
+    // .catch(error => console.log(error))
 
-
-    
+    axios.get("https://breakingbadapi.com/api/characters")
+    .then((ömer) => SetItemList(ömer.data))
   },[])
 
   return(

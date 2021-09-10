@@ -1,45 +1,39 @@
-import SingleComment from "./SingleComment";
-import profile1 from "./images/1.jpg";
-import profile2 from "./images/2.png";
-import profile3 from "./images/3.jpg";
-import UserCard from "./UserCard";
-import "./index.css"
+import Card from "./component/Card"
+import { useState,useEffect } from "react";
+// import data from "./data.json"
 
-const App = () => {
+function App(){
+
+  const [itemList, SetItemList] = useState([]);
+
+  useEffect(() => {
+    fetch("https://breakingbadapi.com/api/characters")
+    .then(response => response.json())
+    .then(data => {SetItemList(data); console.log(data)})
+    .catch(error => console.log(error)
+      )
+
+
+    
+  },[])
+
   return(
-    <div className = "ui comments">
-      <UserCard>
-        <SingleComment 
-        name = "Uğurcan"  
-        date = "Today at 5.00 PM"
-        comment = "It's amazing"
-        picture = {profile1}
-        header = "Uğurcan Çakır"
-        />
-      </UserCard>
 
-      <UserCard> 
-        <SingleComment 
-        name = "Tony"   
-        date = "Today at 6.00 PM"
-        comment = "Great"
-        picture = {profile2}
-        header = "Nwakamea"
-         />
-      </UserCard>
+    <div className="App">
 
-    <UserCard>
-        <SingleComment 
-        name = "Bakasetas"  
-        date = "Today at 7.00 PM"
-        comment = "Well-done"
-        picture = {profile3}
-        header = " Bakasetas"
-         />
-      </UserCard>
-      
+      <header className="header">
+          <img src="https://www.logolynx.com/images/logolynx/55/55a537ca9549600cf7d1d0b274b3bc61.png" alt="Breaking Bad Logo" /> 
+      </header>
+
+      <div className="cards">
+       {itemList.map((ömer) => (
+         <Card key = {ömer.char_id} soner = {ömer} />
+       ))}
+      </div>
+
     </div>
   )
-}
-export default App
 
+};
+
+export default App;
